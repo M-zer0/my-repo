@@ -9,8 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: one
-      run | echo ${{github.event.pull_request.requested_reviewers[0].login}}
-            echo ${{github.event.pull_request.requested_reviewers[0].login}}
+      run: |
+          echo ${{github.event.pull_request.requested_reviewers[0].login}}echo ${{github.event.pull_request.requested_reviewers[0].login}}
     - name: member1
       if: github.event.pull_request.requested_reviewers[0].login == 'member1'
       run: echo "Login_Name=Slack_memberID" >> "$GITHUB_ENV"             
