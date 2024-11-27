@@ -1,10 +1,6 @@
 name: Send_Pullrequest-Message
 on:
   push:
-env:
-  SLACK_USERNAME: PullReqBot
-  SLACK_ICON: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
-  SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
 jobs:
   send_pullrequest-messagess:
     timeout-minutes: 2
@@ -19,6 +15,9 @@ jobs:
       uses: rtCamp/action-slack-notify@v2
       if: ${{ always() }}
       env:
+        SLACK_USERNAME: PullReqBot
+        SLACK_ICON: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
         SLACK_TITLE: pullreq
         SLACK_COLOR: good
         SLACK_MESSAGE: Push pullReq
