@@ -1,8 +1,6 @@
 name: Send_Pullrequest-Message
 on:
-  pull_request:
-   types:
-    - ready_for_review
+  push:
 env:
   SLACK_USERNAME: PullReqBot
   SLACK_ICON: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
@@ -17,11 +15,11 @@ jobs:
            echo ${{github.event.pull_request.requested_reviewers[0]}}
            echo ${{github.event.pull_request.requested_reviewers[0].login}}
            echo "${GITHUB_ENV}"
-    - name: Slack Notification on Success
+    - name: Slack Notification
       uses: rtCamp/action-slack-notify@v2
-      if: ${{ success() }}
+      if: ${{ always() }}
       env:
-        SLACK_TITLE: pullreq / Success
+        SLACK_TITLE: pullreq
         SLACK_COLOR: good
         SLACK_MESSAGE: Push pullReq
     - name: member1
