@@ -1,0 +1,44 @@
+name: Send_Pullrequest-Message
+on:
+  pull_request:
+   types:
+    - ready_for_review
+env:
+  SLACK_USERNAME: PullReqBot
+  SLACK_ICON: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
+  SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+jobs:
+  send_pullrequest-messagess:
+    timeout-minutes: 2
+    runs-on: ubuntu-latest
+    steps:
+    - name: one
+      run: echo ${{github.event.pull_request.requested_reviewers}}
+           echo ${{github.event.pull_request.requested_reviewers[0]}}
+           echo ${{github.event.pull_request.requested_reviewers[0].login}}
+           echo "${GITHUB_ENV}"
+    - name: Slack Notification on Success
+      uses: rtCamp/action-slack-notify@v2
+      if: ${{ success() }}
+      env:
+        SLACK_TITLE: pullreq / Success
+        SLACK_COLOR: good
+        SLACK_MESSAGE: Push pullReq
+    - name: member1
+      run: echo "Login_Name=U07MJKPLW9Z" >> "$GITHUB_ENV"             
+    - name: member2
+      if: github.event.pull_request.requested_reviewers[0].login == 'member2'
+      run: echo "Login_Name=Slack_memberID" >> "$GITHUB_ENV"
+    - name: member3
+      if: github.event.pull_request.requested_reviewers[0].login == 'member3'
+      run: echo "Login_Name=Slack_memberID" >> "$GITHUB_ENV"       
+    - uses: slackapi/slack-github-action@v1.16.0
+      if: env.Login_Name != '' 
+      with:
+        payload: "{\"text\":\" <@Naoya Miyazawa>\\n 以下のプルリクエストを作成しました。\\n 
+         Title     : ${{ github.event.pull_request.title}}\\n 
+         URL       : ${{ github.event.pull_request.html_url}}\\n
+         Assignees : ${{ github.event.pull_request.assignees[0].login}}\\n
+         Revwer    : ${{ github.event.pull_request.requested_reviewers[0].login}}\"}"     
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
