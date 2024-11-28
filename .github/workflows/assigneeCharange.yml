@@ -1,0 +1,11 @@
+name: SendPullRequestMessage
+on:
+  pull-request:
+  types:
+  - ready_for_reaview
+jobs:
+  send_pullreq_message:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkAssignee:
+      run: echo ${{ github.event.pull_request.title}}
