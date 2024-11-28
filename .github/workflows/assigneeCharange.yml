@@ -8,4 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: checkAssignee
-      run: echo ${{ github.event.pull_request.title}}
+      run: | 
+        echo ${{ github.event.pull_request.title}}
+        echo ${{ github.event.pull_request.Assignees}}
+        echo ${{ github.event.pull_request.Assignees[0]}}
