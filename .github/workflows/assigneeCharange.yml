@@ -1,8 +1,7 @@
 name: SendPullRequestMessage
 on:
   pull_request:
-    types:
-    - [opend, reopend, ready_for_review]
+    types: [opened, ready_for_review, reopened]
 jobs:
   send_pullreq_message:
     runs-on: ubuntu-latest
