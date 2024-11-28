@@ -7,5 +7,5 @@ jobs:
   send_pullreq_message:
     runs-on: ubuntu-latest
     steps:
-    - name: checkAssignee:
+    - name: checkAssignee
       run: echo ${{ github.event.pull_request.title}}
