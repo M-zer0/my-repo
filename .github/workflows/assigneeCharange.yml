@@ -2,7 +2,7 @@ name: SendPullRequestMessage
 on:
   pull_request:
     types:
-    - ready_for_review
+    - [opend, reopend, ready_for_review]
 jobs:
   send_pullreq_message:
     runs-on: ubuntu-latest
@@ -12,3 +12,5 @@ jobs:
         echo ${{ github.event.pull_request.title}}
         echo ${{ github.event.pull_request.Assignees[0]}}
         echo ${{ github.event.pull_request.Assignees[0].login}}
+        echo ${{ github.event.pull_request.Assignees[1].login}}
+        echo ${{ github.event.pull_request.Assignees.number}}
