@@ -27,10 +27,10 @@ jobs:
       id: slack
       uses: slackapi/slack-github-action@v2.0.0
       with:
+        webhook: ${{ secrets.SLACK_WEBHOOK }}
         payload: "{\"text\":\" <@Naoya Miyazawa>\\n 以下のプルリクエストを作成しました。\\n 
           Title     : ${{ github.event.pull_request.title}}\\n 
           URL       : ${{ github.event.pull_request.html_url}}\\n
           Assignees : ${{ github.event.pull_request.assignees[0].login}}\\n
           Revwer    : ${{ github.event.pull_request.requested_reviewers[0].login}}\"}"
-        env:
-          webhook: ${{ secrets.SLACK_WEBHOOK }}
+
