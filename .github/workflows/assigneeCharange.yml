@@ -13,3 +13,12 @@ jobs:
         echo ${{ github.event.pull_request.Assignees[0].login}}
         echo ${{ github.event.pull_request.Assignees[1].login}}
         echo ${{ github.event.pull_request.Assignees.number}}
+    - uses: slackapi/slack-github-action@v1.16.0
+      with:
+        payload: "{\"text\":\" <@Naoya Miyazawa>\\n 以下のプルリクエストを作成しました。\\n 
+         Title     : ${{ github.event.pull_request.title}}\\n 
+         URL       : ${{ github.event.pull_request.html_url}}\\n
+         Assignees : ${{ github.event.pull_request.assignees[0].login}}\\n
+         Revwer    : ${{ github.event.pull_request.requested_reviewers[0].login}}\"}"     
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
