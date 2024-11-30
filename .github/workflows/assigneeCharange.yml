@@ -13,6 +13,16 @@ jobs:
         echo ${{ github.event.pull_request.Assignees[0].login}}
         echo ${{ github.event.pull_request.Assignees[1].login}}
         echo ${{ github.event.pull_request.Assignees.number}}
+    - name: Slack Notification
+      uses: rtCamp/action-slack-notify@v2
+      if: ${{ always() }}
+      env:
+        SLACK_USERNAME: PullReqBot
+        SLACK_ICON: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_TITLE: pullreq
+        SLACK_COLOR: good
+        SLACK_MESSAGE: Push pullReq
     - uses: slackapi/slack-github-action@v1.16.0
       with:
         payload: "{\"text\":\" <@Naoya Miyazawa>\\n 以下のプルリクエストを作成しました。\\n 
