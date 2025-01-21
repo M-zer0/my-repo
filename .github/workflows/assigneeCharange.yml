@@ -58,6 +58,7 @@ jobs:
                 body: '? Thanks for reporting!'
             })
 
+            const { IncomingWebhook } = require('@slack/webhook')
             const MEMBER_INFO = [
               {slackName: "n-miyazawa", slackMemberId: "U07MJKPLW9Z", githubName: "M-zer0"}
             ]
