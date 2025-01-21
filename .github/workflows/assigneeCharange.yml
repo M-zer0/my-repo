@@ -3,6 +3,24 @@ on:
   pull_request:
     types: [opened, ready_for_review, reopened]
 jobs:
+  comment_opening_announce:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+      - name: Comment opening announce
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const params = {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number,
+            }
+            await github.rest.issues.createComment(params)
+
   send_pullreq_message:
     runs-on: ubuntu-latest
     steps:
