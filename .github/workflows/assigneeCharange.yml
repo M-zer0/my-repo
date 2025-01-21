@@ -3,6 +3,19 @@ on:
   pull_request:
     types: [opened, ready_for_review, reopened]
 jobs:
+  comment_opening_announce:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '? Thanks for reporting!'
+            })
   send_pullreq_message:
     runs-on: ubuntu-latest
     steps:
@@ -13,6 +26,7 @@ jobs:
         echo ${{ github.event.pull_request.Assignees[0].login}}
         echo ${{ github.event.pull_request.Assignees[1].login}}
         echo ${{ github.event.pull_request.Assignees.number}}
+        echo ${{ secrets.GITHUB_TOKEN }}
     - name: checkScript
       uses: actions/github-script@v6
       with:
@@ -21,17 +35,15 @@ jobs:
           const MEMBER_INFO = [
             {slackName: "n-miyazawa", slackMemberId: "U07MJKPLW9Z", githubName: "M-zer0"}
           ]
-          const requestUser = context.payload.sender.login;
-          const author = MEMBER_INFO.find(member => member.githubName === user);
+          const requestUser = context.payload.sender.login
           
-          const approver = MEMBER_INFO[0]; 
-          const message = "<@${approver.slackMemberId}> こんにちは";
+          const approver = MEMBER_INFO[0]
+          const message = "<@${approver.slackMemberId}> こんにちは"
           const webhook = new IncomingWebhook('https://miyazawalocal.slack.com/archives/C07MM7UDN6Q')
           
-          await webhook.send({
+          webhook.send({
             text: message,
           });
-
 
     - name: Send GitHub trigger payload to Slack Workflow Builder
       id: slack
