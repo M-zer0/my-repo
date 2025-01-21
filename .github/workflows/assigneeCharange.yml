@@ -5,12 +5,8 @@ on:
 jobs:
   comment_opening_announce:
     runs-on: ubuntu-latest
-    permissions:
-      issues: write
-      pull-requests: write
     steps:
-      - name: Comment opening announce
-        uses: actions/github-script@v6
+      - uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
@@ -18,8 +14,9 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.payload.pull_request.number,
+              body: 'foooo!'
             }
-            await github.rest.issues.createComment(params)
+            github.issues.createComment(params)
 
   send_pullreq_message:
     runs-on: ubuntu-latest
