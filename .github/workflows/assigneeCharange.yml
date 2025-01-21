@@ -43,11 +43,24 @@ jobs:
       uses: actions/github-script@v6
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        scripts: |
+        script: |
           github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: '? Thanks for reporting!'
-              })
+          })
+
+          const MEMBER_INFO = [
+            {slackName: "n-miyazawa", slackMemberId: "U07MJKPLW9Z", githubName: "M-zer0"}
+          ]
+          const requestUser = context.payload.sender.login
+          
+          const approver = MEMBER_INFO[0]
+          const message = "<@${approver.slackMemberId}> こんにちは"
+          const webhook = new IncomingWebhook('https://miyazawalocal.slack.com/archives/C07MM7UDN6Q')
+          
+          webhook.send({
+            text: message,
+          });
     
