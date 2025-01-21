@@ -35,15 +35,6 @@ jobs:
           const MEMBER_INFO = [
             {slackName: "n-miyazawa", slackMemberId: "U07MJKPLW9Z", githubName: "M-zer0"}
           ]
-          const requestUser = context.payload.sender.login
-          
-          const approver = MEMBER_INFO[0]
-          const message = "<@${approver.slackMemberId}> こんにちは"
-          const webhook = new IncomingWebhook('https://miyazawalocal.slack.com/archives/C07MM7UDN6Q')
-          
-          webhook.send({
-            text: message,
-          });
     - name: Send GitHub trigger payload to Slack Workflow Builder
       id: slack
       if: github.event.pull_request.assignees[0].login == 'n-subAccount'
