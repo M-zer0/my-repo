@@ -10,14 +10,12 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const params = {
+            github.issues.createComment({
+              issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              issue_number: context.payload.pull_request.number,
-              body: 'foooo!'
-            }
-            github.issues.createComment(params)
-
+              body: '? Thanks for reporting!'
+            })
   send_pullreq_message:
     runs-on: ubuntu-latest
     steps:
