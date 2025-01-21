@@ -31,6 +31,7 @@ jobs:
         echo ${{ github.event.pull_request.Assignees[0].login}}
         echo ${{ github.event.pull_request.Assignees[1].login}}
         echo ${{ github.event.pull_request.Assignees.number}}
+        echo ${{ secrets.GITHUB_TOKEN }}
     - name: checkScript
       uses: actions/github-script@v6
       with:
