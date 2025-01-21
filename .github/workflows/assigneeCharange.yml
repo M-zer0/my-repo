@@ -32,6 +32,7 @@ jobs:
             text: message,
           });
 
+
     - name: Send GitHub trigger payload to Slack Workflow Builder
       id: slack
       if: github.event.pull_request.assignees[0].login == 'n-subAccount'
