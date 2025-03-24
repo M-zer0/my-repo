@@ -13,7 +13,7 @@ jobs:
       id: Publish
       run: |
         middlePath=""
-        if [${ middlePath} -eq "test"]; then
+        if [${middlePath} -eq "test"]; then
           middlePath="ttt"
         else
           middlePath="yyy"
