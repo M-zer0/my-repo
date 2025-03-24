@@ -8,7 +8,7 @@ jobs:
     steps:
     - name: checkAssignee
       run: |
-        middlePath=test
+        middlePath="test"
         if [${ middlePath} -eq "test"]; then
           middlePath="ttt"
         else
