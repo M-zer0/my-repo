@@ -7,8 +7,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: checkAssignee
+      id: Publish1
+      run: echo "test"
+    - name: checkAssignee
+      id: Publish
       run: |
-        echo "test"
         middlePath=""
         if [${ middlePath} -eq "test"]; then
           middlePath="ttt"
