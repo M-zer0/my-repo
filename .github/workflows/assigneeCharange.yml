@@ -21,6 +21,12 @@ jobs:
     steps:
     - name: checkAssignee
       run: | 
+        middlePath="test"
+        if [${ middlePath} -eq "test"]; then
+          middlePath="ttt"
+        else
+          middlePath="yyy"
+        echo ${middlePath}
         echo ${{ github.event.pull_request.title}}
         echo ${{ github.event.pull_request.Assignees[0]}}
         echo ${{ github.event.pull_request.Assignees[0].login}}
