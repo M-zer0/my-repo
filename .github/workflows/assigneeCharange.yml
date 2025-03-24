@@ -14,7 +14,6 @@ jobs:
         else
           middlePath="yyy"
         echo ${middlePath}
-        echo ${{ github.event.pull_request.title}}
     - name: Send GitHub trigger payload to Slack Workflow Builder
       id: slack
       if: github.event.pull_request.assignees[0].login == 'n-subAccount'
