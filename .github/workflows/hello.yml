@@ -6,3 +6,12 @@ jobs:                             # ジョブの定義
     steps:                        # ステップの定義
       - run: echo "Hello, world"  # シェルコマンドの実行
       - uses: actions/checkout@v4 # アクションの呼び出し
+
+      - run: |
+          middlePath="test"
+          if [${ middlePath} -eq "test"]; then
+            middlePath="ttt"
+          else
+            middlePath="yyy"
+          echo ${middlePath}
+
